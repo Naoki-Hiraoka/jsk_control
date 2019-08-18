@@ -1,0 +1,58 @@
+chains:
+  - name: fullbody
+    topic: fullbody_controller/follow_joint_trajectory
+    joints:
+      - RLEG_JOINT0
+      - RLEG_JOINT1
+      - RLEG_JOINT2
+      - RLEG_JOINT3
+      - RLEG_JOINT4
+      - RLEG_JOINT5
+      - RLEG_JOINT6
+      - LLEG_JOINT0
+      - LLEG_JOINT1
+      - LLEG_JOINT2
+      - LLEG_JOINT3
+      - LLEG_JOINT4
+      - LLEG_JOINT5
+      - LLEG_JOINT6
+      - CHEST_JOINT0
+      - CHEST_JOINT1
+      - HEAD_JOINT0
+      - HEAD_JOINT1
+      - RARM_JOINT0
+      - RARM_JOINT1
+      - RARM_JOINT2
+      - RARM_JOINT3
+      - RARM_JOINT4
+      - RARM_JOINT5
+      - RARM_JOINT6
+      - RARM_JOINT7
+      - LARM_JOINT0
+      - LARM_JOINT1
+      - LARM_JOINT2
+      - LARM_JOINT3
+      - LARM_JOINT4
+      - LARM_JOINT5
+      - LARM_JOINT6
+      - LARM_JOINT7
+duration: 5.0
+features:
+  rarm_checkerboard_finder:
+    type: robot_calibration/CheckerboardFinder
+    topic: /camera_remote/depth_registered/points
+    camera_sensor_name: camera
+    chain_sensor_name: rarm
+    points_x: 6
+    points_y: 5
+    size: 0.03
+    frame_id: rarm_checkerboard
+  larm_checkerboard_finder:
+    type: robot_calibration/CheckerboardFinder
+    topic: /camera_remote/depth_registered/points
+    camera_sensor_name: camera
+    chain_sensor_name: larm
+    points_x: 6
+    points_y: 5
+    size: 0.03
+    frame_id: larm_checkerboard

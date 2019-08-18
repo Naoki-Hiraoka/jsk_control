@@ -1,0 +1,143 @@
+verbose: true
+cal_steps:
+  00_Estimating_Checkerboard_Locations:
+    base_link: BODY
+    models:
+      - name: rarm
+        type: chain
+        frame: RARM_cb_jig
+      - name: larm
+        type: chain
+        frame: LARM_cb_jig
+      - name: camera
+        type: camera3d
+        frame: camera_rgb_optical_frame
+        topic: /camera_remote/depth_registered/points
+    free_frames:
+      - name: rarm_checkerboard
+        x: true
+        y: true
+        z: true
+        roll: true
+        pitch: true
+        yaw: true
+      - name: larm_checkerboard
+        x: true
+        y: true
+        z: true
+        roll: true
+        pitch: true
+        yaw: true
+    error_blocks:
+      - name: rarm_hand_eye
+        type: chain3d_to_chain3d
+        model_a: camera
+        model_b: rarm
+      - name: larm_hand_eye
+        type: chain3d_to_chain3d
+        model_a: camera
+        model_b: larm
+  01_Adding_Camera_Locations:
+    base_link: BODY
+    models:
+      - name: rarm
+        type: chain
+        frame: RARM_cb_jig
+      - name: larm
+        type: chain
+        frame: LARM_cb_jig
+      - name: camera
+        type: camera3d
+        frame: camera_rgb_optical_frame
+        topic: /camera_remote/depth_registered/points
+    free_frames:
+      - name: camera_link_joint
+        x: true
+        y: true
+        z: true
+        roll: true
+        pitch: true
+        yaw: true
+      - name: rarm_checkerboard
+        x: true
+        y: true
+        z: true
+        roll: true
+        pitch: true
+        yaw: true
+      - name: larm_checkerboard
+        x: true
+        y: true
+        z: true
+        roll: true
+        pitch: true
+        yaw: true
+    error_blocks:
+      - name: rarm_hand_eye
+        type: chain3d_to_chain3d
+        model_a: camera
+        model_b: rarm
+      - name: larm_hand_eye
+        type: chain3d_to_chain3d
+        model_a: camera
+        model_b: larm
+  02_Joint_Offset:
+    base_link: BODY
+    models:
+      - name: rarm
+        type: chain
+        frame: RARM_cb_jig
+      - name: larm
+        type: chain
+        frame: LARM_cb_jig
+      - name: camera
+        type: camera3d
+        frame: camera_rgb_optical_frame
+        topic: /camera_remote/depth_registered/points
+    free_params:
+      - RARM_JOINT0
+      - RARM_JOINT1
+      - RARM_JOINT2
+      - RARM_JOINT3
+      - RARM_JOINT4
+      - RARM_JOINT5
+      # do not move the last joint
+      - LARM_JOINT0
+      - LARM_JOINT1
+      - LARM_JOINT2
+      - LARM_JOINT3
+      - LARM_JOINT4
+      - LARM_JOINT5
+      # do not move the last joint
+      - HEAD_JOINT0
+    free_frames:
+      - name: camera_link_joint
+        x: true
+        y: true
+        z: true
+        roll: true
+        pitch: true
+        yaw: true
+      - name: rarm_checkerboard
+        x: true
+        y: true
+        z: true
+        roll: true
+        pitch: false # the axis which is the same direction as parent joint axis should not be caliblated
+        yaw: true
+      - name: larm_checkerboard
+        x: true
+        y: true
+        z: true
+        roll: true
+        pitch: false # the axis which is the same direction as parent joint axis should not be caliblated
+        yaw: true
+    error_blocks:
+      - name: rarm_hand_eye
+        type: chain3d_to_chain3d
+        model_a: camera
+        model_b: rarm
+      - name: larm_hand_eye
+        type: chain3d_to_chain3d
+        model_a: camera
+        model_b: larm
