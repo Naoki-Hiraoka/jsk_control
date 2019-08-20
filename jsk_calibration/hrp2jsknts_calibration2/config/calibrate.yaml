@@ -123,14 +123,16 @@ cal_steps:
         y: true
         z: true
         roll: true
-        pitch: false # the axis which is the same direction as parent joint axis should not be caliblated
+        pitch: true
+        #pitch: false # the axis which is the same direction as parent joint axis should not be caliblated
         yaw: true
       - name: larm_checkerboard
         x: true
         y: true
         z: true
         roll: true
-        pitch: false # the axis which is the same direction as parent joint axis should not be caliblated
+        pitch: true
+        #pitch: false # the axis which is the same direction as parent joint axis should not be caliblated
         yaw: true
     error_blocks:
       - name: rarm_hand_eye
